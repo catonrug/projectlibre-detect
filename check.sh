@@ -83,7 +83,7 @@ printf %s "$filelist" | while IFS= read -r url
 do {
 
 #calculate filename
-filename=$(echo $url | sed "s/\//\n/g" | grep "zip\|exe")
+filename=$(echo $url | sed "s/\//\n/g" | grep "zip\|msi")
 
 #check if this filename is in database
 grep "$filename" $db > /dev/null
@@ -96,7 +96,7 @@ wget $url -O $tmp/$filename -q
 
 #check downloded file size if it is fair enought
 size=$(du -b $tmp/$filename | sed "s/\s.*$//g")
-if [ $size -gt 256000 ]; then
+if [ $size -gt 51200 ]; then
 echo
 
 #detect version from url
